@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Digital clock</title>
+	<style type="text/css">
+		*{
+			/*background:url('img/retina_wood.png');*/
+			background-color: rgb(8, 8, 8);
+			font-family: Bradley Hand ITC;
+		} 
+		.clock{
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color:#fff;
+		margin: 0;
+		font-size: 4em;
+		padding: 0 20px; 
+		text-shadow: 10px 15px 20px #fe3a80;
+		}
+		.dami{
+		position: absolute;
+		top: 30%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color:#fff;
+		margin: 0;
+		font-size: 6em;
+		padding: 0 20px; 
+		text-shadow: 0 0 10px #ff005b;
+		}
+		.dami:after{
+			content: attr(data-text);
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 0 20px;
+			z-index: -1;
+			color:#ff005b;
+			filter: blur(15px);
+		}
+		.dami:before{
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -2;
+			background:#fe3a80;
+			opacity: .5;
+			filter: blur(40px);
+
+		}
+	</style>
+</head>
+<body>
+	<div id="myclockdisplay" class="clock"></div>
+	<div data-text="{{Web_Developer}}" class="dami">{{Web_Developer}}</div>
+	<script type="text/javascript">
+
+		function showTime(){
+			var date = new Date();
+		var h = date.getHours(); // 0 - 23
+		var m = date.getMinutes(); // 0 - 59
+		var s = date.getSeconds(); // 0 - 59
+		var session = "AM";
+
+		if(h == 0){
+			h = 12;
+		}
+		else if(h > 12){
+			h = h - 12;
+			session = "PM";
+		}
+
+		h = (h < 10) ? "0" + h: h;
+		m = (m < 10) ? "0" + m: m;
+		s = (s < 10) ? "0" + s: s;
+
+		var time = h + ":" + m + ":" + s + ' ' + session;
+		document.getElementById("myclockdisplay").innerText = time;
+		document.getElementById("myclockdisplay").textContent = time;
+
+	}
+
+	setInterval(showTime, 1000);
+
+</script>
+</body>
+</html>
